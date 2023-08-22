@@ -32,7 +32,7 @@ public class logoutServlet extends HttpServlet {
 		// Invalidate the session
         session.invalidate(); 
         // Redirect to the login page
-        response.sendRedirect("login.js");
+        response.sendRedirect("login.jsp");
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

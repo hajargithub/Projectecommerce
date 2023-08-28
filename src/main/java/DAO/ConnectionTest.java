@@ -10,9 +10,9 @@ public class ConnectionTest {
 		 try {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				System.out.println("driver ok");
-				String url="jdbc:mysql://sql7.freemysqlhosting.net:3306/sql7640908";
-				String user="sql7640908";
-				String pass="qCjxbkxVa2";
+				String url="jdbc:mysql://mysql8002.site4now.net:3306/db_a9df6d_dbecom";
+				String user="a9df6d_dbecom";
+				String pass="Java@123321";
 				co=DriverManager.getConnection(url,user,pass);
 				System.out.println("cnx ok");
 			} catch (ClassNotFoundException e) {

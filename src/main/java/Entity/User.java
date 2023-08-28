@@ -12,8 +12,20 @@ public class User {
 	private String password;
 	private Role role;
 	
+	public User( String nom, String prenom, int age, Date date_naissance, String email, String password,
+			Role role) {
+		this.nom = nom;
+		this.prenom = prenom;
+		this.age = age;
+		this.date_naissance = date_naissance;
+		this.email = email;
+		this.password = password;
+		this.role = role;
+	}
+	
 	public User(long idUser, String nom, String prenom, int age, Date date_naissance, String email, String password,
 			Role role) {
+		super();
 		this.idUser = idUser;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -23,6 +35,7 @@ public class User {
 		this.password = password;
 		this.role = role;
 	}
+
 	public long getIdUser() {
 		return idUser;
 	}

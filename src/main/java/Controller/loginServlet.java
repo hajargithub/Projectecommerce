@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import DAO.AdminDao;
+import DAO.UserDao;
+import Entity.User;
 
 /**
  * Servlet implementation class loginServlet
@@ -40,18 +42,27 @@ public class loginServlet extends HttpServlet {
 	        String email = request.getParameter("email");
 	        String password = request.getParameter("password");
 	        String role = AdminDao.authenticateUser(email, password);
+	        User user=UserDao.getUser(email, password);
 
 	        if ("ADMIN".equals(role)) {
 	        	  // Authentification réussie, créez une session et stockez l'info d'authentification
 	            HttpSession session = request.getSession();
 	           session.setAttribute("isAdminLoggedIn", true);
-
+	           session.setAttribute("user", user);
 	            // Redirigez vers le tableau de bord de l'administrateur
 	            response.sendRedirect("adminDashboard.jsp");
 	     	   
-	        } else {
+	        } else if ("USER".equals(role)) {
+	        	  // Authentification réussie, créez une session et stockez l'info d'authentification
+	            HttpSession session = request.getSession();
+	           session.setAttribute("isUserLoggedIn", true);
+	           session.setAttribute("user", user);
+	            // Redirigez vers le tableau de bord de l'administrateur
+	            response.sendRedirect("ServletIndex");
+	        } 
+	        else {
 	            // Échec de l'authentification, redirigez vers la page de connexion avec un message d'erreur
-	            response.sendRedirect("login.jsp");
+	            response.sendRedirect("signup.jsp");
 	        }
 		}
 	      

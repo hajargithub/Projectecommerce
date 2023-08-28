@@ -12,6 +12,14 @@ public class Role {
 		this.roleName = roleName;
 		this.users = users;
 	}
+	public Role(long idRole, String roleName) {
+		super();
+		this.idRole = idRole;
+		this.roleName = roleName;
+	}
+	public Role( String roleName) {
+		this.roleName = roleName;
+	}
 	public String getRoleName() {
 		return roleName;
 	}

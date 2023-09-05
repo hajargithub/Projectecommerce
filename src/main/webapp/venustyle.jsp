@@ -112,15 +112,27 @@
             <li>
                 <a href="panier.jsp">
                     <input type="text" class="form-control cart-badge" value="0" id="cartLengthInput">
-                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                    <span class="padding_10">Panier</span>
+                    <i class="fa fa-shopping-cart fa-lg position-relative" ></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">Panier</span>
                 </a>
             </li>
             <li>
-                <a href="login.jsp">
+                    <c:if test="${sessionScope.isUserLoggedIn}">
+                    		<div class="drpdown">
+				            <button class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton"  type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				            Hello ${user.nom} </button>
+				            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+								<a class="dropdown-item" href="logoutServlet">Log Out</a>
+							</div>
+							</div>
+                    </c:if>
+                     <c:if test="${empty sessionScope.isUserLoggedIn}">
+                       <a href="login.jsp">
                     <i class="fa fa-user" aria-hidden="true"></i>
                     <span class="padding_10">Login</span>
-                </a>
+                      </a>
+                    </c:if>
+                      
             </li>
         </ul>
     </div>

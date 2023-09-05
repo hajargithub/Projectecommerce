@@ -10,6 +10,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.mysql.cj.Session;
+
+import Entity.User;
 
 /**
  * Servlet implementation class ServletCommande
@@ -31,8 +39,7 @@ public class ServletCommande extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
-		String cardditem =request.getParameter("card");	
-				System.out.println(cardditem);
+
 	
 	}
 
@@ -42,8 +49,31 @@ public class ServletCommande extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String cartData = request.getParameter("cartData");
-        System.out.println(cartData);
+    	// Read the JSON data from the request body
+        StringBuilder sb = new StringBuilder();
+        BufferedReader reader = request.getReader();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            sb.append(line);
+        }
+
+        // Parse the JSON data
+        JSONObject jsonData = new JSONObject(sb.toString());
+
+        // Now you can access the data in jsonData
+        JSONArray cartData = jsonData.getJSONArray("cartData");
+        String otherInfo = jsonData.getString("otherInfo");
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+System.out.println(cartData);
+System.out.println(user.getEmail());
+
+        // Process the data as needed
+
+        // Send a response if needed
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write("Data received successfully");
     }
 
 }

@@ -155,31 +155,6 @@
                     </tr>
                 </thead>
                 <tbody >
-                    <!-- <!-- <tr class="trlignpanier">
-                        <td data-th="Product">
-                            <div class="row">
-                                <div class="col-md-3 text-left">
-                                    <img src="" alt="" class="img-fluid d-none d-md-block rounded mb-2 shadow imageproductpanier">
-                                </div>
-                                <div class="col-md-9 text-left mt-sm-2">
-                                    <h4 class="nameproductpanier"></h4>
-                                    <p class="font-weight-light catproductpanier"></p>
-                                </div>
-                            </div>
-                        </td>
-                        <td data-th="Prix"class="prixproductpanier"></td>
-                        <td  class="quantite_choisie">
-                        	<Button id="min">-</Button>
-                            <input type="text" class="inputquantie_choisie"  value="1">
-                            <Button id="max">+</Button>
-                        </td>
-                        <td class="actions" data-th="">
-						<a class="btn btn-sm btn-outline-danger" href="#">
-							<i class="fa fa-trash fa-lg" style="color: #e71818"></i>
-						</a>
-                        </td>
-                    </tr> --> 
-
                 </tbody>
             </table>
             <div class="float-right text-right">
@@ -190,10 +165,11 @@
     </div>
     <div class="row mt-4 d-flex align-items-center">
         <div class="col-sm-6 order-md-2 text-right">
+                  
         <c:if test="${sessionScope.isUserLoggedIn}">
-            <a href="#" id="hrefcommande" class="btn btn-success mb-4 btn-lg pl-5 pr-5">Commander</a>
-       </c:if>
-        	<c:if test="${empty sessionScope.isUserLoggedIn}">
+            <button id="commandButton" class="btn btn-success mb-4 btn-lg pl-5 pr-5">Commander</button>
+        </c:if>
+        <c:if test="${empty sessionScope.isUserLoggedIn}">
        <a href="login.jsp" class="btn btn-success mb-4 btn-lg pl-5 pr-5">Commander</a>
          	</c:if>
         </div>
@@ -374,11 +350,9 @@
     	const reducedValue = s.reduce((accumulator, currentObject) => {
     	  return accumulator + currentObject.totalrow;
     	}, 0);
-    	console.log(reducedValue)  
+    	//console.log(reducedValue)  
         var total = document.getElementById("Totalpanier");
-			total.innerHTML = reducedValue+"DH";
-			
-   
+			total.innerHTML = reducedValue+"DH";  
 document.addEventListener("DOMContentLoaded", function() {
     var commanderButton = document.getElementById("hrefcommande");
 
@@ -411,6 +385,67 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
+//Assuming cartData is a valid JSON array
+var cartData = JSON.parse(cartData); // Your cart data here
+// Create an object with the data to send
+var payload = {
+    cartData: cartData,
+    otherInfo: "Additional information if needed"
+};
+
+var servletUrl = 'ServletCommande'; // Adjust this URL to match your servlet's path
+
+
+ fetch(servletUrl, {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+})
+.then(response => response.json())
+.then(data => {
+    // Handle the response from the servlet if needed
+    console.log('Response from servlet:', data);
+    // Now, you can redirect the user to a confirmation page or perform other actions
+    window.location.href = 'confirmationPage.jsp';
+})
+.catch(error => {
+    console.error('Error:', error);
+});
+
+/* document.getElementById('commandButton').addEventListener('click', function() {
+  // Create a form element
+  var form = document.createElement('form');
+  form.action = 'ServletCommande';
+  form.method = 'POST';
+	console.log("card:",JSON.parse(cartData));
+  // Create hidden input fields for each product object
+  cartData.forEach(function(product, index) {
+    // Use appropriate input names based on your data structure
+    createHiddenInput(form, 'productId[' + index + ']', product.idProduit);
+    createHiddenInput(form, 'productName[' + index + ']', product.nom);
+    createHiddenInput(form, 'productPrix[' + index + ']', product.prix);
+    createHiddenInput(form, 'productCategoryName[' + index + ']', product.categorie);
+    createHiddenInput(form, 'productQuantityDispo[' + index + ']', product.quantity_dispo);
+    createHiddenInput(form, 'productQuantityChoisis[' + index + ']', product.quantity_choisis);
+    createHiddenInput(form, 'productTotal[' + index + ']', product.totalrow);
+    createHiddenInput(form, 'productPhoto[' + index + ']', product.urlPhoto);
+  });
+
+  // Append the form to the document and submit it
+  document.body.appendChild(form);
+  form.submit();
+});
+
+// Helper function to create hidden input fields
+function createHiddenInput(form, name, value) {
+  var input = document.createElement('input');
+  input.type = 'hidden';
+  input.name = name;
+  input.value = value;
+  form.appendChild(input);
+} */
 </script>
   
 </body>

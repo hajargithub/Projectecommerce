@@ -98,11 +98,12 @@
                             <div class="header_box">
     <div class="login_menu">
         <ul class="menu-list">
-            <li>
-                 <a href="panier.jsp">
+           <li style="margin-right:50px;">
+                <a href="panier.jsp">
+                    <i class="fa fa-shopping-cart fa-lg position-relative" ></i>
+                    <span class="position-absolute top-0 start-100 translate-middle p-2 rounded-circler">
                     <input type="text" class="form-control cart-badge" value="0" id="cartLengthInput">
-                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                    <span class="padding_10">Panier</span>
+                    </span>
                 </a>
             </li>
             <li>
@@ -413,39 +414,15 @@ var servletUrl = 'ServletCommande'; // Adjust this URL to match your servlet's p
 .catch(error => {
     console.error('Error:', error);
 });
+ cartLength = JSON.parse(localStorage.getItem("cart"));
+ console.log("hhh",cartLength)
+	const reducedValueint = cartLength.reduce((accumulator, currentObject) => {
+	  return accumulator + currentObject.quantity_choisis;
+	}, 0);
+	console.log(reducedValueint)     	
+	document.getElementById("cartLengthInput").value = reducedValueint;
 
-/* document.getElementById('commandButton').addEventListener('click', function() {
-  // Create a form element
-  var form = document.createElement('form');
-  form.action = 'ServletCommande';
-  form.method = 'POST';
-	console.log("card:",JSON.parse(cartData));
-  // Create hidden input fields for each product object
-  cartData.forEach(function(product, index) {
-    // Use appropriate input names based on your data structure
-    createHiddenInput(form, 'productId[' + index + ']', product.idProduit);
-    createHiddenInput(form, 'productName[' + index + ']', product.nom);
-    createHiddenInput(form, 'productPrix[' + index + ']', product.prix);
-    createHiddenInput(form, 'productCategoryName[' + index + ']', product.categorie);
-    createHiddenInput(form, 'productQuantityDispo[' + index + ']', product.quantity_dispo);
-    createHiddenInput(form, 'productQuantityChoisis[' + index + ']', product.quantity_choisis);
-    createHiddenInput(form, 'productTotal[' + index + ']', product.totalrow);
-    createHiddenInput(form, 'productPhoto[' + index + ']', product.urlPhoto);
-  });
 
-  // Append the form to the document and submit it
-  document.body.appendChild(form);
-  form.submit();
-});
-
-// Helper function to create hidden input fields
-function createHiddenInput(form, name, value) {
-  var input = document.createElement('input');
-  input.type = 'hidden';
-  input.name = name;
-  input.value = value;
-  form.appendChild(input);
-} */
 </script>
   
 </body>

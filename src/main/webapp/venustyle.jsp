@@ -109,11 +109,12 @@
               <div class="header_box">
     <div class="login_menu">
         <ul class="menu-list">
-            <li>
+            <li style="margin-right:50px;">
                 <a href="panier.jsp">
-                    <input type="text" class="form-control cart-badge" value="0" id="cartLengthInput">
                     <i class="fa fa-shopping-cart fa-lg position-relative" ></i>
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">Panier</span>
+                    <span class="position-absolute top-0 start-100 translate-middle p-2 rounded-circler">
+                    <input type="text" class="form-control cart-badge" value="0" id="cartLengthInput">
+                    </span>
                 </a>
             </li>
             <li>
@@ -320,11 +321,11 @@
 }
 
 cartLength = JSON.parse(localStorage.getItem("cart"));
-	const reducedValue = cartLength.reduce((accumulator, currentObject) => {
+	const reducedValueinput = cartLength.reduce((accumulator, currentObject) => {
 	  return accumulator + currentObject.quantity_choisis;
 	}, 0);
-	console.log(reducedValue)     	
- 	document.getElementById("cartLengthInput").value = reducedValue;
+	console.log(reducedValueinput)     	
+ 	document.getElementById("cartLengthInput").value = reducedValueinput;
 
 
 </script>

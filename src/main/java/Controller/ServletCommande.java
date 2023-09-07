@@ -64,7 +64,8 @@ public class ServletCommande extends HttpServlet {
         JSONArray cartData = jsonData.getJSONArray("cartData");
         String otherInfo = jsonData.getString("otherInfo");
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        User user 
+        = (User) session.getAttribute("user");
 System.out.println(cartData);
 System.out.println(user.getEmail());
 

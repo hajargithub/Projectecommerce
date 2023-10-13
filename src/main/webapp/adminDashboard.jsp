@@ -17,6 +17,14 @@
     
     <!-- App CSS -->  
     <link id="theme-style" rel="stylesheet" href="assets/css/portal.css">
+    <!-- Bootstrap CSS -->
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    
 
 </head> 
 
@@ -122,9 +130,18 @@
 		    <div class="container-xl">		    
 <div class="container">
     <div class="row justify-content-center align-items-center" style="min-height: 100vh;">
-        <div class="col-12 text-center">
-            <h2 class="fw-bold">Bienvenue Admin</h2>
+<div class="col-12 text-center">
+    <h2 class="fw-bold">Bienvenue Admin</h2>
+    <div class="row justify-content-center align-items-center" style="min-height: 100vh;">
+        <div class="col-md-6 text-center">
+            <canvas id="myChart" width="150" height="150"></canvas>
         </div>
+        <div class="col-md-6 text-center">
+            <canvas id="topSellingChart" width="150" height="150"></canvas>
+        </div>
+    </div>
+</div>
+
     </div>
 </div>
 
@@ -146,9 +163,76 @@
     <!-- Page Specific JS -->
     <script src="assets/js/app.js"></script> 
 	</c:if>
-	<c:if test="${empty sessionScope.isAdminLoggedIn}">
+	<%-- <c:if test="${empty sessionScope.isAdminLoggedIn}">
         <p class="text-danger">Veuillez vous connecter en tant qu'administrateur.</p>
-    </c:if>
+    </c:if> --%>
+
+<script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Robes', 'Combinaison', 'Haut', 'Chaussures', 'Accessories', 'Pantalons'],
+            datasets: [
+                {
+                    data: [300, 50, 100, 14, 19, 3, 5, 2, 15],
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(238, 130, 238, 0.2)',
+                        'rgba(238, 130, 238, 0.2)',
+                        'rgba(238, 130, 238, 0.2)',
+                        'rgba(238, 130, 238, 0.2)',
+                        'rgba(238, 130, 238, 0.2)',
+                        'rgba(238, 130, 238, 0.2)'
+                    ],
+                    hoverBackgroundColor: [
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(238, 130, 238, 1)',
+                        'rgba(238, 130, 238, 1)',
+                        'rgba(238, 130, 238, 1)',
+                        'rgba(238, 130, 238, 1)',
+                        'rgba(238, 130, 238, 1)',
+                        'rgba(238, 130, 238, 1)'
+                    ]
+                }
+            ]
+        },
+        options: {
+            cutout: '60%',
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    var topSellingCtx = document.getElementById('topSellingChart').getContext('2d');
+    var topSellingChart = new Chart(topSellingCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Robes', ' Combinaison', 'Haut', 'Chaussures', 'Accessories','Pantalons'],
+            datasets: [{
+                label: 'Units Sold',
+                data: [14, 19, 3, 5, 2,15],
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
 </body>
 </html> 
 

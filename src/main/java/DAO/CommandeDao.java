@@ -54,22 +54,22 @@ public class CommandeDao {
 						   }
 						return list;
 	}	
-	public static long addCommande(Commande C) {
-		Connection conx=ConnectionTest.TestConnection();
-		try {
-			Statement st=conx.createStatement();
-			System.out.println(p.getCategorie());
-			System.out.println(idCat);
-			String query="INSERT INTO `commande` (`idComnande`, `created_at`, `idUser`) VALUES (NULL, '2023-08-28', '3');)";
-			 int rowsAffected = st.executeUpdate(query);
-	            if (rowsAffected > 0) {
-	                System.out.println("Product added successfully.");
-	            } else {
-	                System.out.println("Failed to added product.");
-	            }
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+//	public static long addCommande(Commande C) {
+//		Connection conx=ConnectionTest.TestConnection();
+//		try {
+//			Statement st=conx.createStatement();
+////			System.out.println(p.getCategorie());
+////			System.out.println(idCat);
+//			String query="INSERT INTO `commande` (`idComnande`, `created_at`, `idUser`) VALUES (NULL, '2023-08-28', '3');)";
+//			 int rowsAffected = st.executeUpdate(query);
+//	            if (rowsAffected > 0) {
+//	                System.out.println("Product added successfully.");
+//	            } else {
+//	                System.out.println("Failed to added product.");
+//	            }
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 }

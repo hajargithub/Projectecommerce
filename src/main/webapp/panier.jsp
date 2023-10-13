@@ -143,10 +143,9 @@
         <div class="col-lg-12 col-md-12 col-12">
             <h1 class="fashion_taital">Panier</h1>
 			<br>
-            <table id="cartDataDisplay" class="table table-condensed table-responsive">
-                <thead>
-                    <tr>
-                        <th style="width:60%">Photo</th>
+            <table id="cartDataDisplay" class="table table-condensed table-responsive table-striped">
+<thead class="thead-light">                    <tr>
+                        <th style="width:20%">Photo</th>
                         <th style="width:12%">Nom</th>
                          <th style="width:16%">Categorie</th>
                         <th style="width:10%">Prix</th>
@@ -155,8 +154,7 @@
                           <th style="width:16%">action</th>
                     </tr>
                 </thead>
-                <tbody >
-                </tbody>
+<tbody  >                </tbody>
             </table>
             <div class="float-right text-right">
                 <h2>Total:</h2>
@@ -258,22 +256,30 @@
                   
                           
                     var q = document.createElement("td");
-                    
+                     q.style.display = 'flex'; 
+                     q.style.alignItems = 'center';
+ 
                     var boutn1 = document.createElement("button");
-                    boutn1.textContent = "-"
+                    boutn1.textContent = "-";
+                    boutn1.className = "btn btn-link px-2";
 
                     var input1 = document.createElement("input");
-                    input1.value=item.quantity_choisis
+                    input1.className = "form-control form-control-sm";
+                    input1.style.margin = '0 5px'; // Adjust margin for proper spacing
+                    input1.style.width = '50px'; // Set a specific width for the input field
+                    input1.style.padding = '5px'; // Adjust padding for the input field
+                    input1.style.boxSizing = 'border-box';
+                    input1.value = item.quantity_choisis;
+
                     var boutn2 = document.createElement("button");
-                    boutn2.textContent = "+"
+                    boutn2.textContent = "+";
+                    boutn2.className = "btn btn-link px-2";
+                  
                      q.appendChild(boutn1);
                     q.appendChild(input1);
                     q.appendChild(boutn2);
                     row.appendChild(q);
                     boutn2.addEventListener("click", function() {
-                    	// var qt_chois = item.quantity_choisis++
-							//if(item.quantity_dispo >= qt_chois){}
-                    	
                     	input1.value++
                     	item.quantity_choisis++
                         localStorage.setItem("cart", JSON.stringify(parsedCartData));
@@ -300,6 +306,7 @@
 
                     var v = document.createElement("td");
                     var btn = document.createElement("button");
+                    btn.className = "btn btn-danger"; 
                     btn.textContent = "supprimer";
 					btn.addEventListener("click", function() {
 			            removeFromCart(item.idProduit); // Call the function with the idProduit

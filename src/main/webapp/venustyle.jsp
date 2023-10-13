@@ -177,7 +177,7 @@
                                     <div class="buy_bt">
  <button type="button" class="btn app-btn-secondary" onclick="addToCart('${e.idProduit}', '${e.nom}', '${e.prix}','${e.quantite_dispo}','${e.urlPhoto}','${e.categorie.title }')"><i class="fa fa-cart-plus fa-lg" aria-hidden="true" ></i></button>
                                    </div>
-                                 	  <span style="color: #719192;margin-top: 15px;font-weight: bold;">${e.prix}</span>
+                                 	  <span style="color: #719192;margin-top: 15px;font-weight: bold;">${e.prix} <strong>DH</strong></span>
                                  </div>
                               </div>
                            </div>
